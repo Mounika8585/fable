@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, AdminWrap lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, AdminWrap lite design, AdminWrap lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="AdminWrap Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Admin tables Weather Fable</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/adminwrap-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/admin_dashboard/assets/images/favicon.png">
+    <!-- Bootstrap Core CSS -->
+    <link href="/admin_dashboard/assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/admin_dashboard/html/css/style.css" rel="stylesheet">
+    <link href="/admin_dashboard/html/css/colors/default.css" id="theme" rel="stylesheet">
+  <style>
+            /* Modal Styles */
+/* /* Modal Styles */
+.modal, .modal1{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+   justify-content: center;
+   align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete-user-btn,.delete-user-btn1 {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-user-btn:hover,.delete-user-btn1:hover {
+  background-color: #cc0000;
+}
+
+ .modal-content {
+            padding: 0px; /* Adjust this padding as needed */
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+.popupform ,.popupform1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+ .popupdelete,.popupdelete1
+ {
+	 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+                                                                                                                                          
+        
+ }
+
+        /* Style the form container */
+        form {
+            width: 300px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+             display: flex;
+    		flex-direction:column ;
+    		align-items: center;
+        }
+
+        /* Style form labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Style form input fields */
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Style submit button */
+        button {
+            width: 14.5%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Hover effect on submit button */
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .add-user-button ,.add-user-button1 {
+			width: 30%;
+            margin-top: 10px;
+            background-color: rgb(0, 128, 0);
+            color: #fff;
+        }
+
+        /* Hover effect for the "Add User" button */
+        .add-user-button:hover,.add-user-button1:hover {
+            background-color: #2980b9;
+        }
+        
+        .delete-user-button, .delete-user-button1 {
+			width: 30%;
+            margin-top: 10px;
+            background-color: rgb(0, 128, 0);
+            color: #fff;
+        }
+        
+        .popupform,.popupform1 {
+            /* Your existing styles for the popup form */
+            position: relative;
+        }
+        
+          span.close {
+    display: block; /* Set the display property to block */
+    margin-top: 1px; /* Adjust the top margin for spacing */
+    cursor: pointer; /* Add cursor style to indicate it's clickable */
+}
+
+span.close1 {
+    display: block; /* Set the display property to block */
+    margin-top: 1px; /* Adjust the top margin for spacing */
+    cursor: pointer; /* Add cursor style to indicate it's clickable */
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the font bold */
+    color: black; 
+}
+
+
+        </style>
+</head>
+
+<body class="fix-header card-no-border fix-sidebar">
+    
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Weather Fable</p>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/admin/view_adminprofile">
+                        <b>
+                          <img src="/admin_dashboard/assets/images/Logo.png" alt="Weather Fable Logo" width="40" height="40" style="border: 1px solid black; border-radius: 50%;">
+                        </b>
+                    <span style="font-weight: bold; color: #20aee3;">Weather Fable</span>
+                    </a>
+                </div>
+                
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="fa fa-bars"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item hidden-xs-down search-box"> <a
+                                class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg></a>
+                            <form class="app-search">
+                                <input type="text" class="form-control" placeholder="Search & enter"> <a
+                                    class="srh-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg></a> </form>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown u-pro">
+                            <!--<a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="pages-profile.html"
+                                id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="window.location.href='/home'">-->
+                                <a class="nav-link waves-effect waves-dark profile-pic" href="/admin_dashboard/html/pages-profile.html">
+                                <img src="/admin_dashboard/assets/images/big/OIP.jpg" alt="user" class="" />
+                                     <span class="hidden-md-down">Signout &nbsp;</span> </a>
+                                    
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- <li> <a class="waves-effect waves-dark" href="/admin_dashboard" aria-expanded="false"><i
+                                    class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a> -->
+                        <!--</li>-->
+                        
+                        <li> <a class="waves-effect waves-dark" href="/admin/view_adminprofile" aria-expanded="false">
+                        
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                       </svg>
+                        &nbsp;
+                        <span class="hide-menu">Profile</span></a>
+                        
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="/admin/getUsers" aria-expanded="false">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                          <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/>
+                       </svg>
+                        &nbsp;
+                       <span class="hide-menu">User Table</span></a>
+                        </li>
+                        
+                          <li> <a class="waves-effect waves-dark" href="/admin/getAllfood" aria-expanded="false">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-database-fill-check" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1"/>
+  <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905"/>
+</svg> &nbsp;<span class="hide-menu">Food Database</span></a>
+                        </li>
+                        
+                         <li> <a class="waves-effect waves-dark" href="/admin/getClothItems" aria-expanded="false">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-database-fill-check" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1"/>
+  <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905"/>
+</svg> &nbsp;<span class="hide-menu">Cloth Database</span></a>
+                        </li>
+                        
+                         <li> <a class="waves-effect waves-dark" href="/admin/getOutActs" aria-expanded="false">
+                         <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" fill="currentColor" class="bi bi-database-fill-check" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1"/>
+  <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905"/>
+</svg> &nbsp;<span class="hide-menu">Out-Activity Database</span></a>
+                        </li>
+                        
+                         <li> <a class="waves-effect waves-dark" href="/admin/getTrNms" aria-expanded="false">
+                         <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" fill="currentColor" class="bi bi-database-fill-check" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1"/>
+  <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905"/>
+</svg> &nbsp;<span class="hide-menu">Travel Database</span></a>
+                        </li>
+                        
+                        
+                        <li> <a class="waves-effect waves-dark" href="/admin/api/view" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+  <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+</svg> &nbsp;<span class="hide-menu">Open WeatherMap</span></a>
+                        </li>
+                        
+                        
+                         <li> <a class="waves-effect waves-dark" href="/admin/api/wview" aria-expanded="false">
+                         <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" fill="currentColor" class="bi bi-cloud-drizzle-fill" viewBox="0 0 16 16">
+  <path d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m-3.5 1.5a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m6 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 1 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317m.747-8.498a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973"/>
+</svg> &nbsp;<span class="hide-menu">Weather Api</span></a>
+                        </li>
+                        <!-- <li> <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false"><i
+                                    class="fa fa-bookmark-o"></i><span class="hide-menu">Blank</span></a>
+                        </li>
+                        <li> <a class="waves-effect waves-dark" href="pages-error-404.html" aria-expanded="false"><i
+                                    class="fa fa-question-circle"></i><span class="hide-menu">404</span></a>
+                        </li> -->
+                    </ul>
+                   
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        
+        <div class="page-wrapper">
+            
+            <div class="container-fluid">
+               
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">Travel Table</h3>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                           <li>
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+                             </svg>
+                             </li>
+                            <li>Travel Database</li>
+                        </ol>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-success" id="addUserButton">Add Record</button>
+                    
+                        <!-- The Add User Modal -->
+                        <div id="addUserModal" class="modal">
+                            <!-- Modal content -->
+                             <div class="content">
+                                
+                           
+                             <div class="popupform">   
+                             <form th:action="@{/admin/addTrNms}" th:object="${traname}" th:method="post">
+                    
+                    				<span class="close">&times;</span> 
+                    				
+     
+                    				<label for="addUsername">Travel Name:</label>
+                                    <input type="text" id="addUsername" name="Travelname"  required>
+                                    
+                                 
+                                    
+                                    <button type="submit" class="add-user-button">Add</button>
+                                    
+                                </form>
+                             </div>
+                             
+                             </div>
+                              
+                        </div>
+                    
+                        
+                    <button class="btn btn-danger" id="deleteUserButton">Delete Record</button>
+                        <!-- The Delete User Modal -->
+                        <div id="deleteUserModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="content">
+                                    
+                                    
+                                  <div class = "popupdelete">  <form th:action="@{/admin/delTrNms}" th:method="post">
+									  <span class="close">&times;</span>
+									  
+                                      <label for="userId">Travel ID:</label>
+                                      <input type="text" id="userId" name="travelid" required>
+                                      
+                                      <button type="submit" class="delete-user-button" >Delete</button>
+                                    </form>
+                                  </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Basic Table</h4>
+                                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>TravelID</th>
+                                                <th>TravelName</th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="Userinsertion">
+                                        
+                                               <tr th:each="t : ${trnms}">
+                                                    <td th:text="${t.travelid}"></td>
+                                                    <td th:text="${t.Travelname}"></td>
+                                           
+                                                </tr>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="text-center mt-4">
+                        <button class="btn btn-success" id="addUserButton1" onclick="openModal('addUserModal1')">Add Record</button>
+                    
+                        <!-- The Add User Modal -->
+                        <div id="addUserModal1" class="modal">
+                            <!-- Modal content -->
+                             <div class="content">
+
+
+                               <div class="popupform">  
+                               
+                                <form th:action="@{/admin/addTraReco}"  th:method="post">
+									
+									<span class="close1" onclick="closeModal('addUserModal1')" >&times;</span>
+                    
+                                    <label for="addUsername">Travel Id :</label>
+                                    <input type="text" id="addUsername" name="travelid"  required>
+                                    
+                                     <label for="addUsername">Recommendation Level Id :</label>
+                                    <input type="text" id="addUsername" name="recommendationLevelId"  required>
+                                    
+                                     <label for="addUsername">Weather Description Id :</label>
+                                    <input type="text" id="addUsername" name="weatherDescriptionId"  required>
+                    
+                          
+                                    <button type="submit" class="add-user-button">Add</button>
+                                    
+                                    </form>
+                                    
+                               </div>
+
+                              </div>
+                              
+                        </div>
+                    
+                        
+                    <button class="btn btn-danger" id="deleteUserButton1" onclick="openModal('deleteUserModal1')">Delete Record</button>
+                        <!-- The Delete User Modal -->
+                        <div id="deleteUserModal1" class="modal">
+                            <!-- Modal content -->
+                            <div class="content">
+                                    
+
+                                   <div class = "popupdelete">  
+									   
+							   <form th:action="@{/admin/delTraReco}" th:method="post">
+                                      <span class="close1" onclick="closeModal('deleteUserModal1')" >&times;</span>
+                                      
+                                      <label for="userId">Travel recommendation Id :</label>
+                                      <input type="text" id="userId" name="outreid" required>
+                                      
+                                       <button type="submit" class="delete-user-button" >Delete</button>
+								</form>
+								</div>
+                                    
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Activity Mapping Table</h4>
+                                <h6 class="card-subtitle">Food <code>.table-2</code></h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+												<th>Activity Recommendation Id</th>
+                                                <th>Activity Item Id</th>
+                                                <th>RLevel Id</th>
+                                                <th>Weather Id</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        
+                                        <tbody id="Userinsertion">
+											<tr th:each="a : ${trs}">
+                                                    <td th:text="${a.recommendation_Id}"></td>
+                                                    <td th:text="${a.trvlname_Id}"></td>
+                                                    <td th:text="${a.level_Id}"></td>
+                                                    <td th:text="${a.description_Id}"></td>
+                                                </tr>
+
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+           
+        </div>
+        
+    </div>
+   
+    <script src="/admin_dashboard/assets/node_modules/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/admin_dashboard/assets/node_modules/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="/admin_dashboard/html/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="/admin_dashboard/html/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/admin_dashboard/html/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/admin_dashboard/html/js/custom.min.js"></script>
+    <!-- jQuery peity -->
+    <!-- <script src = "js/adduser.js"></script> -->
+    <!-- <script src= "/html/js/deleteuser"></script> -->
+    <script src="/admin_dashboard/html/js/adminuser.js"></script>
+    <script src="/admin_dashboard/assets/node_modules/peity/jquery.peity.min.js"></script>
+    <script src="/admin_dashboard/assets/node_modules/peity/jquery.peity.init.js"></script>
+    <!-- Your existing HTML content... -->
+<script>
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "flex";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        // Your existing code for updating the dashboard table
+
+        // Function to handle signout and redirect to /home
+        $(".profile-pic").click(function (event) {
+			event.preventDefault();
+            // Redirect to /home
+            window.location.href = '/home';
+        });
+    });
+</script>
+
+
+
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Your existing code for updating the dashboard table
+
+        // Function to handle signout and redirect to /home
+        $(".profile-pic").click(function (event) {
+			event.preventDefault();
+            // Redirect to /home
+            window.location.href = '/logout';
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

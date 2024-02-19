@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+   
+    <style>
+        /* Add some basic styling for the weather boxes and container */
+       
+      body {
+        font-family: 'Arial', sans-serif;
+          /*  background-color: #3498db;*/
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding-top: 60px;
+           
+        }
+        .forecast-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+ 
+        .weather-box {
+        border: 8px outset #ccc;
+        padding: 15px; /* Increase padding for better spacing */
+        margin: 70px; /* Increase margin for better spacing */
+        text-align: center;
+        width: 18%; /* Adjust the width as needed */
+       
+        border-radius: 10px; /* Add border-radius for rounded corners */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/* Adjust the width as needed */
+        }
+       
+         .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            /*background-color: rgba(75, 218, 210, 0.692); */
+            background-color: #106ba3bb;
+            z-index: 2;
+        }
+ 
+        .logo {
+            width: 250px;
+            display: flex;
+            margin-left: 150px;
+        }
+ 
+       
+ 
+        .logo a {
+            text-decoration: none;
+            color: #fff;
+            font-size: x-large;
+            display: flex;
+            align-items: center;
+        }
+ 
+        .logo img {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+ 
+        .image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+ 
+ 
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+        }
+        h1 {
+            color: #106ba3bb;
+            margin-bottom: 2px;
+            margin-top: 100px;
+        }
+       
+        label[for="locationInput"] {
+            font-size: 22px; /* Adjust the font size as needed */
+            font-family: Arial, sans-serif;
+            display: block;
+            margin-bottom: 15px;
+            color: #106ba3bb;
+            font-size: 16px;
+            font-weight: bold;
+}
+ 
+ 
+#locationInput,
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    color: #67b8eebb;
+    color: #1a1b1b;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+ 
+button{
+  background-color: #67b8eebb  !important;
+}
+ 
+button:hover {
+    background-color: #2980b9;
+    color: #000;
+}
+   #locationInput {
+    width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+       
+    }
+    .forecast-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+        }
+ 
+ 
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: auto;
+    width: 18rem;
+    margin: 0 10px;
+    border-radius: 10px;
+}
+ 
+.card:hover {
+    transform: scale(1.05);
+    background-color: #106ba3bb;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+ 
+.card-body {
+    padding: 1rem;
+}
+ 
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: whitesmoke;
+}
+ 
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #1a1b1b;
+}
+ 
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+ 
+ 
+       
+ 
+    </style>
+   
+</head>
+<body>
+ 
+ 
+<div class="navbar">
+    <div class="logo">
+        <img src="/Login/Logo.png" alt="Weather Fable Logo" width="40" height="40">
+       
+        <a href="/user_dash" >Weather Fable</a>
+    </div>
+</div>
+<div class="image-container">
+    <img src="Homepage/images/forecast.png">
+</div>
+ 
+    <div class="form">
+         <h1>Weather Forecast</h1><br>
+   
+    <label for="locationInput">Enter Location:</label>
+    <input type="text" id="locationInput" placeholder="Enter location">
+    <button onclick="getWeatherForecast()">Get Forecast</button> <br><br><br><br>
+ 
+    <div id="weatherForecast" class="forecast-container"></div>
+ 
+</div>
+   
+ 
+ 
+ 
+ 
+ 
+   <script>
+   
+           function fetchApiConfig() {
+	
+        return fetch('/admin/api/wapiobj')
+          .then(response => response.json())
+          .then(config => {
+    return {
+        apiKey: config.wapiKey,
+        apiUrl: config.wapiUrl
+          };
+       });
+
+     }
+   
+    async function getWeatherForecast() {
+        const locationInput = document.getElementById("locationInput").value;
+       
+        if (!locationInput) {
+            alert("Please enter a location.");
+            return;
+        }
+ 
+ fetchApiConfig()
+    .then(config => {
+    
+        var apiKey = config.apiKey;
+        var apiUrl = `${config.apiUrl}?key=${apiKey}&q=${locationInput}&days=5&aqi=no&alerts=no`;
+        
+        
+         fetch(apiUrl)
+            .then(response => response.json())
+            .then(data =>  {
+ 
+        if (data.cod === '404') {
+            alert("Please enter a correct location.");
+            return;
+        }
+ 
+        const forecastContainer = document.getElementById("weatherForecast");
+        forecastContainer.innerHTML = ''; // Clear previous forecast
+ 
+        data.forecast.forecastday.slice(0, 5).forEach(day => {
+            const card = document.createElement("div");
+            card.className = "card m-2";
+           card.style = "width: 18rem;";
+ 
+            const cardBody = document.createElement("div");
+            cardBody.className = "card-body";
+ 
+            const date = new Date(day.date_epoch * 1000);
+            const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
+ 
+            const title = document.createElement("h5");
+            title.className = "card-title";
+            title.textContent = dayOfWeek;
+ 
+            const minTemp = document.createElement("p");
+            minTemp.className = "card-text";
+            minTemp.textContent = `Min Temp: ${day.day.mintemp_c}°C`;
+ 
+            const maxTemp = document.createElement("p");
+            maxTemp.className = "card-text";
+            maxTemp.textContent = `Max Temp: ${day.day.maxtemp_c}°C`;
+ 
+            const condition = document.createElement("p");
+            condition.className = "card-text";
+            condition.textContent = `Condition: ${day.day.condition.text}`;
+ 
+            const weatherIcon = document.createElement("img");
+            weatherIcon.src = day.day.condition.icon;
+            weatherIcon.alt = "Weather Icon";
+            weatherIcon.width = 80;
+            weatherIcon.height = 80;
+ 
+            cardBody.appendChild(title);
+            cardBody.appendChild(minTemp);
+            cardBody.appendChild(maxTemp);
+            cardBody.appendChild(condition);
+            cardBody.appendChild(weatherIcon);
+ 
+            card.appendChild(cardBody);
+ 
+            forecastContainer.appendChild(card);
+            
+               });
+             })
+        })
+    }
+</script>
+ 
+ 
+   
+</body>
+</html>
